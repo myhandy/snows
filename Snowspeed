@@ -1,0 +1,35 @@
+package com.myhandy.sspeed;
+
+import java.util.logging.Logger;
+//import org.bukkit.ChatColor;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+public class Snowspeed extends JavaPlugin implements Listener{
+	public static Snowspeed plugin;
+	public final Logger logger= Logger.getLogger("Minecraft");
+	
+	@Override
+	public void onEnable(){
+		getServer().getPluginManager().registerEvents(this, this);
+		this.logger.info("SnowSpeed Plugin Has Been Enabled!");
+	}
+	@Override
+	public void onDisable(){
+		this.logger.info("SnowSpeed Plugin Has Been Disabled!");
+	}
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent p){
+		System.out.println("derpityt");
+		p.getPlayer().sendMessage(getConfig().getString("JoinSnowMessage").replace('&', '§'));
+		p.getPlayer().setWalkSpeed(0.5f);
+		p.getPlayer().sendMessage("it worked");
+	}
+}
+
+//server get list of all players
+//check if player is in defined world (config)
+//check if block is in certain area around each player (5x5x5 125 [below waist level only 63]
+//if not set speed to slower
+//repeat every 10 ticks 
